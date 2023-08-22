@@ -4,8 +4,8 @@
 ip.addr == 192.168.0.7
 frame.time >= "2019-08-01 00:00:00" && frame.time <= "2019-08-01 23:59:59"
 ```
-## Process of the method
-1.  Compute the Domain Query Probability (the code in **domain_probability.py**)
+## Steps of the method
+#### 1.  Compute the Domain Query Probability (code in **domain_probability.py**)
    
   * We have IoT traffic traces collected over a period of T = 2 consecutive weeks from 53 different IoT devices.
 
@@ -42,7 +42,7 @@ q21 was queried in 4out of 4 time windows: p21 = 4/4
 
 q22 was queried in  2 out of 4 time windows: p22 = 2/4
 
-2. Compute the domain IDF (the code in **IoT_idf.py**)
+#### 2. Compute the domain IDF (code in **IoT_idf.py**)
    
 * Count the number of clients Nc(q_i) for each domain q_i during the observation period Tp.
 * Count the total number of client Nc.
@@ -50,4 +50,9 @@ q22 was queried in  2 out of 4 time windows: p22 = 2/4
   
   IDF(q_i) = $log (1 + \frac{Nc}{Nc(q_i)+1})$
 
-3. Compute the threasholds for each IoT device  
+#### 3. Compute the threasholds for each IoT device(code in threashold.py)  
+
+* Find similarity score between IoT and non-IoT devices and treat them as negetive scores.
+* Find similarit score between IoT and IoT devices and treat them as positive scores.
+* Generate ROC curve
+* Use 0.1% as a tolerable flase positve rate to find a threashold
